@@ -5,6 +5,7 @@ import Library from './components/Library'
 import data from './data'
 import './styles/app.scss'
 import Nav from './components/Nav'
+import { handleLibraryUpdate } from './util'
 
 function App() {
   // Ref
@@ -42,6 +43,7 @@ function App() {
     let songIndex = songs.findIndex((song) => song.id === currentSong.id)
     await setCurrentSong(songs[(songIndex + 1) % songs.length])
     isPlaying && audioRef.current.play()
+    handleLibraryUpdate(songs[songIndex + 1], songs, setSongs)
   }
 
   return (

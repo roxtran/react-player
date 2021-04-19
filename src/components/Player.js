@@ -6,6 +6,7 @@ import {
   faAngleRight,
   faPause
 } from '@fortawesome/free-solid-svg-icons'
+import { handleLibraryUpdate } from '../util'
 
 const Player = ({
   audioRef,
@@ -39,31 +40,18 @@ const Player = ({
 
     if (direction === 'forward') {
       songIndex = (songIndex + 1) % songs.length
-      await setCurrentSong(songs[songIndex])
-      handleLibraryUpdate(songs[songIndex])
     }
     if (direction === 'back') {
       songIndex--
       songIndex < 0 && (songIndex = songs.length - 1)
-      await setCurrentSong(songs[songIndex])
-      handleLibraryUpdate(songs[songIndex])
     }
+    await setCurrentSong(songs[songIndex])
+    handleLibraryUpdate(songs[songIndex], songs, setSongs)
     isPlaying && audioRef.current.play()
   }
   // Add the styles
   const animTrack = {
     transform: `translateX(${songInfo.animateProgress}%)`
-  }
-
-  const handleLibraryUpdate = (currentSong) => {
-    const newSongs = songs.map((song) => {
-      if (song.id === currentSong.id) {
-        return { ...song, active: true }
-      } else {
-        return { ...song, active: false }
-      }
-    })
-    setSongs(newSongs)
   }
 
   return (
