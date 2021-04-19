@@ -13,14 +13,29 @@ function App() {
   const [songs, setSongs] = useState(data)
   const [currentSong, setCurrentSong] = useState(songs[0])
   const [isPlaying, setIsPlaying] = useState(false)
-  const [songInfo, setSongInfo] = useState({ currentTime: 0, duration: 0 })
+  const [songInfo, setSongInfo] = useState({
+    currentTime: 0,
+    duration: 0,
+    animateProgress: 0
+  })
   const [showLibrary, setShowLibrary] = useState(false)
 
   // Event Listeners
   const handleTimeUpdate = (e) => {
     const currentTime = e.target.currentTime
     const duration = e.target.duration
-    setSongInfo({ ...songInfo, currentTime, duration })
+    // Calculate percentage
+    const roundedCurrent = Math.round(currentTime)
+    const roundedDuration = Math.round(duration)
+    const percentage = Math.round((roundedCurrent / roundedDuration) * 100)
+
+    // console.log(percentage)
+    setSongInfo({
+      ...songInfo,
+      currentTime,
+      duration,
+      animateProgress: percentage
+    })
   }
 
   return (

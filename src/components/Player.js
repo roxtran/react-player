@@ -60,18 +60,25 @@ const Player = ({
     }
     playAudio(isPlaying, audioRef)
   }
+  // Add the styles
+  const animTrack = {
+    transform: `translateX(${songInfo.animateProgress}%)`
+  }
 
   return (
     <div className='player'>
       <div className='time-control'>
         <p>{formatTime(songInfo.currentTime) || '0:00'}</p>
-        <input
-          min={0}
-          max={songInfo.duration || 0}
-          value={songInfo.currentTime}
-          onChange={handleProgress}
-          type='range'
-        />
+        <div style={{background:`linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})` }} className='progress-container'>
+          <input
+            min={0}
+            max={songInfo.duration || 0}
+            value={songInfo.currentTime}
+            onChange={handleProgress}
+            type='range'
+          />
+          <div style={animTrack} className='animate-progress'></div>
+        </div>
         <p>{formatTime(songInfo.duration)}</p>
       </div>
       <div className='play-control'>
