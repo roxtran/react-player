@@ -43,12 +43,12 @@ const chillHop = [
   },
   {
     id: uuidv4(),
-    name: 'Magenta Forever',
-    artist: 'Aviino',
+    name: 'Colors Fade',
+    artist: 'Sleepy Fish',
     cover:
-      'https://chillhop.com/wp-content/uploads/2020/10/23fdd99adc3e16abcb67b004ea3e748ebf433a49-1024x1024.jpg',
-    color: ['#5799DB', '#4C3C69'],
-    audio: 'https://mp3.chillhop.com/serve.php/?mp3=10455',
+      'https://chillhop.com/wp-content/uploads/2020/09/686808356b2bbc6a368e372ea604150bc346c788-1024x1024.jpg',
+    color: ['#DEE6EC', '#5C5C6A'],
+    audio: 'https://mp3.chillhop.com/serve.php/?mp3=10028',
     active: false
   },
   {
