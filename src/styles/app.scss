@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.5s ease;
 }
 
 body {
@@ -17,6 +18,10 @@ h3 {
 h3,
 h4 {
   color: rgb(100, 100, 100);
+}
+
+.library-active {
+  margin-left: 30%;
 }
 
 @import './nav';

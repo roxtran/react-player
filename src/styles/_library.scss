@@ -1,4 +1,4 @@
-$highLight: rgba(231, 205, 255, 0.6);
+$highLight: rgba(188, 124, 218, 0.6);
 
 .library {
   position: fixed;
@@ -23,6 +23,7 @@ $highLight: rgba(231, 205, 255, 0.6);
   flex-direction: row;
   padding: 1rem 2rem 1rem 2rem;
   cursor: pointer;
+  transition: background 0.5s ease;
   img {
     width: 30%;
   }
@@ -72,4 +73,10 @@ $highLight: rgba(231, 205, 255, 0.6);
   background-color: rgba(145, 145, 145, 0.5);
   border-radius: 20px;
   border: transparent;
+}
+
+@media screen and (max-width: 768px) {
+  .library {
+    width: 100%;
+  }
 }
