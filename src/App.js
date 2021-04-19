@@ -40,10 +40,11 @@ function App() {
   }
 
   const handleSongEnd = async () => {
-    let songIndex = songs.findIndex((song) => song.id === currentSong.id)
-    await setCurrentSong(songs[(songIndex + 1) % songs.length])
+    const songIndex = songs.findIndex((song) => song.id === currentSong.id)
+    const nexSongIndex = (songIndex + 1) % songs.length
+    await setCurrentSong(songs[nexSongIndex])
     isPlaying && audioRef.current.play()
-    handleLibraryUpdate(songs[(songIndex + 1) % songs.length], songs, setSongs)
+    handleLibraryUpdate(songs[nexSongIndex], songs, setSongs)
   }
 
   return (
