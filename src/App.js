@@ -43,7 +43,7 @@ function App() {
     let songIndex = songs.findIndex((song) => song.id === currentSong.id)
     await setCurrentSong(songs[(songIndex + 1) % songs.length])
     isPlaying && audioRef.current.play()
-    handleLibraryUpdate(songs[songIndex + 1], songs, setSongs)
+    handleLibraryUpdate(songs[(songIndex + 1) % songs.length], songs, setSongs)
   }
 
   return (
