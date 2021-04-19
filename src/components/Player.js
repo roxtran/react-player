@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faPlay,
@@ -18,19 +18,6 @@ const Player = ({
   songInfo,
   setSongInfo
 }) => {
-  // UseEffect
-  useEffect(() => {
-    const newSongs = songs.map((song) => {
-      if (song.id === currentSong.id) {
-        return { ...song, active: true }
-      } else {
-        return { ...song, active: false }
-      }
-    })
-    setSongs(newSongs)
-    // eslint-disable-next-line
-  }, [currentSong])
-
   // Event Handlers
   const handlePlay = () => {
     isPlaying ? audioRef.current.pause() : audioRef.current.play()
@@ -51,18 +38,32 @@ const Player = ({
     let songIndex = songs.findIndex((song) => song.id === currentSong.id)
 
     if (direction === 'forward') {
-      await setCurrentSong(songs[(songIndex + 1) % songs.length])
+      songIndex = (songIndex + 1) % songs.length
+      await setCurrentSong(songs[songIndex])
+      handleLibraryUpdate(songs[songIndex])
     }
     if (direction === 'back') {
       songIndex--
       songIndex < 0 && (songIndex = songs.length - 1)
       await setCurrentSong(songs[songIndex])
+      handleLibraryUpdate(songs[songIndex])
     }
     isPlaying && audioRef.current.play()
   }
   // Add the styles
   const animTrack = {
     transform: `translateX(${songInfo.animateProgress}%)`
+  }
+
+  const handleLibraryUpdate = (currentSong) => {
+    const newSongs = songs.map((song) => {
+      if (song.id === currentSong.id) {
+        return { ...song, active: true }
+      } else {
+        return { ...song, active: false }
+      }
+    })
+    setSongs(newSongs)
   }
 
   return (
