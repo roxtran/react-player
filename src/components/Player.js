@@ -6,7 +6,6 @@ import {
   faAngleRight,
   faPause
 } from '@fortawesome/free-solid-svg-icons'
-import { playAudio } from '../util'
 
 const Player = ({
   audioRef,
@@ -48,17 +47,18 @@ const Player = ({
     setSongInfo({ ...songInfo, currentTime: e.target.value })
   }
 
-  const handleSkipTrack = (direction) => {
+  const handleSkipTrack = async (direction) => {
     let songIndex = songs.findIndex((song) => song.id === currentSong.id)
 
     if (direction === 'forward') {
-      setCurrentSong(songs[(songIndex + 1) % songs.length])
-    } else if (direction === 'back') {
+      await setCurrentSong(songs[(songIndex + 1) % songs.length])
+    }
+    if (direction === 'back') {
       songIndex--
       songIndex < 0 && (songIndex = songs.length - 1)
-      setCurrentSong(songs[songIndex])
+      await setCurrentSong(songs[songIndex])
     }
-    playAudio(isPlaying, audioRef)
+    isPlaying && audioRef.current.play()
   }
   // Add the styles
   const animTrack = {
@@ -69,7 +69,12 @@ const Player = ({
     <div className='player'>
       <div className='time-control'>
         <p>{formatTime(songInfo.currentTime) || '0:00'}</p>
-        <div style={{background:`linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})` }} className='progress-container'>
+        <div
+          style={{
+            background: `linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})`
+          }}
+          className='progress-container'
+        >
           <input
             min={0}
             max={songInfo.duration || 0}
