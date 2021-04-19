@@ -46,8 +46,8 @@ const Player = ({
       songIndex < 0 && (songIndex = songs.length - 1)
     }
     await setCurrentSong(songs[songIndex])
-    handleLibraryUpdate(songs[songIndex], songs, setSongs)
     isPlaying && audioRef.current.play()
+    handleLibraryUpdate(songs[songIndex], songs, setSongs)
   }
   // Add the styles
   const animTrack = {

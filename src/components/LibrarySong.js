@@ -1,7 +1,7 @@
 import React from 'react'
+import { handleLibraryUpdate } from '../util'
 
 const LibrarySong = ({
-  id,
   song,
   songs,
   setSongs,
@@ -10,26 +10,16 @@ const LibrarySong = ({
   audioRef
 }) => {
   // Event Listeners
-  const handleSongSelect = async (id) => {
+  const handleSongSelect = async () => {
     await setCurrentSong(song)
-
-    // Add active state
-    const newSongs = songs.map((song) => {
-      if (song.id === id) {
-        return { ...song, active: true }
-      } else {
-        return { ...song, active: false }
-      }
-    })
-    setSongs(newSongs)
-
     isPlaying && audioRef.current.play()
+    handleLibraryUpdate(song, songs, setSongs)
   }
 
   return (
     <div
       className={`library-song ${song.active ? 'selected' : ''}`}
-      onClick={() => handleSongSelect(id)}
+      onClick={handleSongSelect}
     >
       <img src={song.cover} alt={song.name} />
       <div className='song-description'>
