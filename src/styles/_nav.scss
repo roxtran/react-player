@@ -4,15 +4,17 @@ nav {
   justify-content: space-around;
   align-items: center;
   button {
+    font-weight: bold;
     background: transparent;
-    border: none;
     border-radius: 5px;
     cursor: pointer;
-    border: 2px solid rgb(66, 66, 66);
+    border: 2px solid $text-color;
+    color: $text-color;
     padding: 0.5rem;
     transition: all 0.3s ease;
+
     &:hover {
-      box-shadow: 3px 4px 0 0 rgb(224, 224, 224);
+      box-shadow: 1px 2px 12px 0 rgba(226, 163, 163, 0.6);
     }
   }
 }
